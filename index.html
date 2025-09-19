@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ru" class="no-js">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Playable Ads Портфолио — Aleksey</title>
+  <meta name="description" content="Портфолио Playable Ads: интерактивные демо, кейсы, технические детали.">
+  <link rel="preconnect" href="https://cdn.example.com" crossorigin>
+  <link rel="preload" as="image" href="assets/cover-placeholder.avif" imagesrcset="assets/cover-placeholder.avif 1x, assets/cover-placeholder@2x.avif 2x" />
+  <meta name="theme-color" content="#0b0b0f" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <!-- OG/Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Playable Ads Портфолио — Aleksey">
+  <meta property="og:description" content="Лёгкий каталог playable реклам с live-демо.">
+  <meta property="og:image" content="assets/og-cover.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Icons -->
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    document.documentElement.classList.remove('no-js'); // hint for CSS
+  </script>
+  <!-- schema.org Portfolio -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"CollectionPage",
+    "name":"Playable Ads Портфолио — Aleksey",
+    "about":{"@type":"CreativeWork","name":"Playable Advertising"},
+    "creator":{"@type":"Person","name":"Aleksey","jobTitle":"Senior Playable Ads Developer"},
+    "isPartOf":{"@type":"WebSite","name":"Aleksey Portfolio"},
+    "inLanguage":"ru"
+  }
+  </script>
+</head>
+<body>
+<header class="site-header" role="banner">
+  <a class="brand" href="/" aria-label="На главную — портфолио Aleksey">Aleksey • Playables</a>
+  <nav class="top-nav" aria-label="Основная навигация">
+    <a href="#" data-view="grid" class="view-toggle is-active" aria-current="page">Grid</a>
+    <a href="carousel/index.html" data-view="carousel" class="view-toggle">Carousel</a>
+    <button id="themeToggle" class="btn ghost" aria-pressed="false" aria-label="Переключить тему">🌓</button>
+  </nav>
+</header>
+
+<main id="main" tabindex="-1">
+  <section class="hero" aria-labelledby="hero-title">
+    <h1 id="hero-title">Playable Ads портфолио</h1>
+    <p class="tagline">Микро-игры с высокой конверсией. Чистый код. 60fps. Мобильные приоритет.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="#contact" data-analytics="CTA">Связаться</a>
+      <span class="count" id="projectCount" aria-live="polite">0 проектов</span>
+    </div>
+  </section>
+
+  <section class="controls" aria-label="Фильтры и поиск">
+    <div class="filters" role="group" aria-label="Фильтр по тегам">
+      <!-- Теги генерятся JS -->
+      <button class="chip is-active" data-tag="all" aria-pressed="true">Все</button>
+      <div id="tagContainer" class="tag-container"></div>
+    </div>
+    <div class="sort-search">
+      <label class="visually-hidden" for="sort">Сортировка</label>
+      <select id="sort" class="select">
+        <option value="newest">Новизна</option>
+        <option value="title">Название A→Z</option>
+        <option value="popular">Популярность</option>
+      </select>
+      <label class="visually-hidden" for="search">Поиск</label>
+      <input id="search" class="input" type="search" placeholder="Поиск по названию/тегам" inputmode="search" />
+      <button id="reset" class="btn ghost">Сброс</button>
+      <label class="toggle">
+        <input type="checkbox" id="masonryToggle" />
+        <span>Masonry-вид</span>
+      </label>
+    </div>
+  </section>
+
+  <section id="gallery" class="gallery" aria-label="Галерея проектов">
+    <!-- Карточки генерятся JS -->
+  </section>
+</main>
+
+<!-- Modal / Lightbox -->
+<div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-title" aria-hidden="true">
+  <div class="lightbox__backdrop" data-close></div>
+  <article class="lightbox__dialog" role="document">
+    <header class="lightbox__header">
+      <h2 id="lightbox-title">Заголовок</h2>
+      <button class="btn icon" id="lightboxClose" aria-label="Закрыть">✕</button>
+    </header>
+    <div class="lightbox__body">
+      <!-- Вариант A: iframe -->
+      <iframe id="playableFrame" title="Playable demo" loading="lazy" sandbox="allow-scripts allow-same-origin" allow="fullscreen; gamepad; accelerometer; gyroscope" hidden></iframe>
+      <!-- Вариант B: inline canvas -->
+      <canvas id="playableCanvas" hidden width="480" height="800" aria-label="Inline playable canvas"></canvas>
+      <!-- Вариант C: video preview -->
+      <video id="playableVideo" hidden controls playsinline preload="metadata" poster="" aria-label="Видео-превью"></video>
+      <p id="projectDesc" class="desc"></p>
+      <ul id="projectTech" class="tech-list" aria-label="Технологии"></ul>
+    </div>
+    <footer class="lightbox__footer">
+      <a id="demoLink" class="btn primary" target="_blank" rel="noopener" href="#" data-analytics="Demo">Открыть демо</a>
+      <a id="storeLink" class="btn" target="_blank" rel="noopener" href="#" data-analytics="Store">Страница в магазине</a>
+    </footer>
+  </article>
+</div>
+
+<section id="contact" class="contact" aria-labelledby="contact-title">
+  <h2 id="contact-title">Контакты</h2>
+  <p>Открыт к контрактам и коллаборациям. Пишите:</p>
+  <p><a href="mailto:aleksey@example.com" class="btn primary" data-analytics="Contact">aleksey@example.com</a></p>
+</section>
+
+<footer class="site-footer" role="contentinfo">
+  <small>© <span id="year"></span> Aleksey. Сделано на чистом HTML/CSS/JS. <a href="carousel/index.html">Версия Carousel →</a></small>
+</footer>
+
+<script defer src="app.js"></script>
+</body>
+</html>
