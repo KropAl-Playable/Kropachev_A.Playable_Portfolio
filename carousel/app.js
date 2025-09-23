@@ -1,10 +1,69 @@
-/* Данные переиспользуем */
-const PROJECTS = window.top?.PROJECTS || [
-  // дублируем/минимум 3 штуки
-  { id:"match3-forest", title:"Forest Match-3", tags:["Match-3","Casual"], cover:{avif:"../assets/match3.avif", webp:"../assets/match3.webp", fallback:"../assets/match3.jpg"}, description:"Головоломка с подсказками.", tech:["Canvas","WebGL","GSAP"], popularity:87, date:"2025-03-10", linkDemo:"https://cdn.example.com/demos/match3/index.html", linkStore:"https://store.example.com/app/match3", playable:{ type:"iframe", src:"https://cdn.example.com/demos/match3/index.html" } },
-  { id:"rpg-raid", title:"Raid Mini-RPG", tags:["RPG","Mid-core"], cover:{avif:"../assets/rpg.avif", webp:"../assets/rpg.webp", fallback:"../assets/rpg.jpg"}, description:"Лайт-боёвка.", tech:["Canvas","Audio","FSM"], popularity:92, date:"2024-12-01", linkDemo:"https://cdn.example.com/demos/rpg/index.html", linkStore:"https://store.example.com/app/rpg", playable:{ type:"video", src:"../assets/rpg-preview.webm", poster:"../assets/rpg-poster.jpg" } },
-  { id:"hyper-swipe", title:"Swipe Rush", tags:["Hyper-casual"], cover:{avif:"../assets/hyper.avif", webp:"../assets/hyper.webp", fallback:"../assets/hyper.jpg"}, description:"Свайпы и чекпоинты.", tech:["WebGL","ECS"], popularity:74, date:"2025-05-22", linkDemo:"https://cdn.example.com/demos/hyper/index.html", linkStore:"https://store.example.com/app/hyper", playable:{ type:"inline-canvas", script:null } }
-];
+/* ===== I18N ===== */
+const USER_LANG = (navigator.language || navigator.userLanguage || "ru").toLowerCase();
+const IS_RU = USER_LANG.startsWith("ru");
+const I18N = {
+  ru: {
+    title: "Playable Ads Портфолио — Aleksey",
+    heroTitle: "Playable Ads — Carousel",
+    genre: "Жанр",
+    forProject: "Проект",
+    order: "Порядок",
+    newer: "Новее",
+    older: "Старее",
+    searchPlaceholder: "Поиск по названию/тегам",
+    reset: "Сброс",
+    play: "Play",
+    store: "Страница в магазине",
+    toggleOrientation: "Ориентация",
+    allGenres: "Все жанры",
+    allProjects: "Все проекты"
+  },
+  en: {
+    title: "Playable Ads Portfolio — Aleksey",
+    heroTitle: "Playable Ads — Carousel",
+    genre: "Genre",
+    forProject: "Client/Project",
+    order: "Order",
+    newer: "Newer",
+    older: "Older",
+    searchPlaceholder: "Search by title/tags",
+    reset: "Reset",
+    play: "Play",
+    store: "Store page",
+    toggleOrientation: "Orientation",
+    allGenres: "All genres",
+    allProjects: "All projects"
+  }
+};
+const T = IS_RU ? I18N.ru : I18N.en;
+try { document.documentElement.setAttribute("lang", IS_RU ? "ru" : "en"); } catch {}
+function applyI18N(){
+  document.title = T.title;
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const key = el.getAttribute("data-i18n");
+    const val = T[key];
+    if (typeof val === "string") el.textContent = val;
+  });
+  document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>{
+    const key = el.getAttribute("data-i18n-placeholder");
+    if (T[key]) el.setAttribute("placeholder", T[key]);
+  });
+}
+function getDescription(p){
+  return IS_RU ? (p.description || p.description_en || "") : (p.description_en || p.description || "");
+}
+
+/* Device */
+function isHandheld(){
+  const uaData = navigator.userAgentData;
+  if (uaData && Array.isArray(uaData.brands)) return uaData.mobile === true;
+  const ua = navigator.userAgent;
+  const isMobile = /Android|iPhone|iPad|iPod|Mobile|Windows Phone/i.test(ua);
+  const isTablet = /iPad|Tablet|Nexus 7|Nexus 10|SM-T|Kindle|Silk/i.test(ua);
+  return isMobile || isTablet;
+}
+
+const PATH_JSON = "../projects.json";
 
 const el = {
   track: document.getElementById("track"),
@@ -12,20 +71,20 @@ const el = {
   dots: document.getElementById("dots"),
   prev: document.getElementById("prev"),
   next: document.getElementById("next"),
-  tagContainer: document.getElementById("tagContainer"),
-  sort: document.getElementById("sort"),
+  genre: document.getElementById("genre"),
+  forProject: document.getElementById("forProject"),
+  order: document.getElementById("order"),
   search: document.getElementById("search"),
   reset: document.getElementById("reset"),
   themeToggle: document.getElementById("themeToggle"),
 
   lightbox: document.getElementById("lightbox"),
   lightboxClose: document.getElementById("lightboxClose"),
+  phoneFrame: document.getElementById("phoneFrame"),
+  orientationToggle: document.getElementById("orientationToggle"),
   playableFrame: document.getElementById("playableFrame"),
-  playableCanvas: document.getElementById("playableCanvas"),
-  playableVideo: document.getElementById("playableVideo"),
   projectDesc: document.getElementById("projectDesc"),
   projectTech: document.getElementById("projectTech"),
-  demoLink: document.getElementById("demoLink"),
   storeLink: document.getElementById("storeLink"),
 };
 document.getElementById("year").textContent = new Date().getFullYear();
@@ -36,79 +95,77 @@ const Analytics = {
   onCTAClick(type, project){ console.log("[analytics] cta", type, project?.id ?? null); }
 };
 
-let state = { tag:"all", search:"", sort:"newest", index:0, filtered: PROJECTS, dragging:false, startX:0, scrollX:0, active: null };
+let ALL = [];
+let state = { genre:"all", forProject:"all", order:"newest", search:"", index:0, filtered:[], dragging:false, startX:0, scrollX:0, active:null, orientation:"portrait" };
 
-initTags(); bindControls(); render();
-
-function initTags(){
-  const tags = Array.from(new Set(PROJECTS.flatMap(p=>p.tags))).sort();
-  tags.forEach(tag=>{
-    const b = document.createElement("button");
-    b.className="chip"; b.type="button"; b.textContent=tag; b.dataset.tag=tag;
-    b.addEventListener("click", ()=> selectTag(tag, b));
-    el.tagContainer.appendChild(b);
-  });
+applyI18N();
+boot();
+async function boot(){
+  try{
+    const res = await fetch(PATH_JSON, { cache:"no-store" });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const json = await res.json();
+    ALL = json.projects || [];
+    buildFilters(ALL);
+    bindControls();
+    render();
+  }catch(e){
+    console.error("Failed to load projects.json", e);
+    const box = document.createElement("div");
+    box.role = "alert";
+    box.style.cssText = "margin:16px;padding:12px;border:1px solid #f00;border-radius:8px";
+    box.textContent = IS_RU
+      ? "Ошибка загрузки projects.json. Открой через http:// и проверь JSON."
+      : "Failed to load projects.json. Open via http:// and check JSON.";
+    document.body.prepend(box);
+  }
 }
-function selectTag(tag, btn){
-  state.tag=tag; document.querySelectorAll(".chip").forEach(ch=> ch.classList.toggle("is-active", ch===btn || (ch.dataset.tag==="all" && tag==="all")));
-  render();
+
+function buildFilters(list){
+  const genres = Array.from(new Set(list.flatMap(p=>p.genres))).sort();
+  for (const g of genres){ const o=document.createElement("option"); o.value=g; o.textContent=g; el.genre.appendChild(o); }
+  const products = Array.from(new Set(list.map(p=>p.forProject))).sort();
+  for (const pr of products){ const o=document.createElement("option"); o.value=pr; o.textContent=pr; el.forProject.appendChild(o); }
 }
 
 function bindControls(){
-  document.querySelector('.chip[data-tag="all"]').addEventListener("click",()=>{state.tag="all"; render();});
-  el.sort.addEventListener("change",(e)=>{state.sort=e.target.value; render();});
-  el.search.addEventListener("input",(e)=>{state.search=e.target.value.toLowerCase().trim(); render();});
-  el.reset.addEventListener("click",()=>{ state={...state, tag:"all", search:"", sort:"newest", index:0}; el.search.value=""; el.sort.value="newest"; document.querySelectorAll(".chip").forEach(c=>c.classList.remove("is-active")); document.querySelector('.chip[data-tag="all"]').classList.add("is-active"); render(); });
-  // theme
+  el.genre.addEventListener("change", (e)=>{ state.genre=e.target.value; render(); });
+  el.forProject.addEventListener("change", (e)=>{ state.forProject=e.target.value; render(); });
+  el.order.addEventListener("change", (e)=>{ state.order=e.target.value; render(); });
+  el.search.addEventListener("input", (e)=>{ state.search=e.target.value.toLowerCase().trim(); render(); });
+  el.reset.addEventListener("click", ()=>{ state={...state, genre:"all", forProject:"all", order:"newest", search:"", index:0}; el.genre.value="all"; el.forProject.value="all"; el.order.value="newest"; el.search.value=""; render(); });
   el.themeToggle.addEventListener("click", () => {
     const dark = document.documentElement.classList.toggle("dark-forced");
     el.themeToggle.setAttribute("aria-pressed", String(dark));
     document.documentElement.style.colorScheme = dark ? "dark" : "light";
   });
 
-  // nav
   el.prev.addEventListener("click", ()=> snapTo(state.index-1));
   el.next.addEventListener("click", ()=> snapTo(state.index+1));
-  el.viewport.addEventListener("keydown", (e)=>{
-    if (e.key === "ArrowLeft") snapTo(state.index-1);
-    if (e.key === "ArrowRight") snapTo(state.index+1);
-  });
+  el.viewport.addEventListener("keydown", (e)=>{ if (e.key==="ArrowLeft") snapTo(state.index-1); if (e.key==="ArrowRight") snapTo(state.index+1); });
 
   // drag/touch
-  const vp = el.viewport;
+  const vp=el.viewport;
   vp.addEventListener("pointerdown", onDown, {passive:true});
   vp.addEventListener("pointermove", onMove, {passive:false});
   vp.addEventListener("pointerup", onUp, {passive:true});
   vp.addEventListener("pointercancel", onUp, {passive:true});
   vp.addEventListener("pointerleave", onUp, {passive:true});
-}
-function onDown(e){
-  state.dragging=true; state.startX=e.clientX; state.scrollX = el.viewport.scrollLeft; el.viewport.setPointerCapture(e.pointerId);
-}
-function onMove(e){
-  if (!state.dragging) return;
-  const dx = e.clientX - state.startX;
-  el.viewport.scrollLeft = state.scrollX - dx;
-  // предотвращаем вертикальный скролл, если горизонтальный доминирует
-  if (Math.abs(dx) > 6) e.preventDefault();
-}
-function onUp(e){
-  if (!state.dragging) return;
-  state.dragging=false;
-  const slideW = el.track.querySelector(".slide")?.getBoundingClientRect().width || 1;
-  const targetIndex = Math.round(el.viewport.scrollLeft / (slideW + 12)); // 12 — gap
-  snapTo(targetIndex);
+
+  document.addEventListener("keydown",(e)=>{ if (e.key==="Escape") closeLightbox(); });
+  document.addEventListener("keydown",(e)=>{ if (e.key==="/"){ e.preventDefault(); el.search.focus(); }});
+  el.orientationToggle.addEventListener("click", toggleOrientation);
 }
 
 function render(){
-  const filtered = PROJECTS
-    .filter(p=> state.tag==="all" || p.tags.includes(state.tag))
-    .filter(p=> !state.search || (p.title.toLowerCase().includes(state.search) || p.tags.join(" ").toLowerCase().includes(state.search)));
+  const filtered = ALL
+    .filter(p => state.genre==="all" || p.genres.includes(state.genre))
+    .filter(p => state.forProject==="all" || p.forProject === state.forProject)
+    .filter(p => !state.search || (p.title.toLowerCase().includes(state.search) || p.tags.join(" ").toLowerCase().includes(state.search)));
 
-  const sorted = filtered.sort((a,b)=>{
-    if (state.sort==="title") return a.title.localeCompare(b.title);
-    if (state.sort==="popular") return b.popularity - a.popularity;
-    return new Date(b.date) - new Date(a.date);
+  const sorted = filtered.sort((a,b) => {
+    const da = new Date(a.date), db = new Date(b.date);
+    return state.order === "newest" ? (db - da) : (da - db);
   });
 
   state.filtered = sorted;
@@ -124,27 +181,40 @@ function createSlide(p){
   const li = document.createElement("li"); li.className="slide"; li.role="listitem"; li.setAttribute("aria-label", p.title);
   const media = document.createElement("div"); media.className="slide__media";
   const picture = document.createElement("picture");
-  const s1 = document.createElement("source"); s1.type="image/avif"; s1.srcset = p.cover.avif;
-  const s2 = document.createElement("source"); s2.type="image/webp"; s2.srcset = p.cover.webp;
-  const img = document.createElement("img"); img.src=p.cover.fallback; img.alt = `${p.title} — обложка`; img.loading="lazy"; img.decoding="async";
-  picture.append(s1,s2,img);
+  picture.innerHTML = `
+    <source type="image/avif" srcset="${p.cover.avif}">
+    <source type="image/webp" srcset="${p.cover.webp}">
+    <img src="${p.cover.fallback}" alt="${p.title} — cover" loading="lazy" decoding="async">
+  `;
   media.appendChild(picture);
 
   const body = document.createElement("div"); body.className="slide__body";
   const h3 = document.createElement("h3"); h3.className="slide__title"; h3.textContent=p.title;
   const tags = document.createElement("div"); tags.className="slide__tags";
-  p.tags.forEach(t=>{ const s=document.createElement("span"); s.className="tag"; s.textContent=t; tags.appendChild(s); });
-  const desc = document.createElement("p"); desc.className="slide__desc"; desc.textContent=p.description;
+  p.genres.forEach(t=>{ const s=document.createElement("span"); s.className="tag"; s.textContent=t; tags.appendChild(s); });
+  const meta = document.createElement("div"); meta.className="slide__tags";
+  const pr = document.createElement("span"); pr.className="tag"; pr.textContent=p.forProject; meta.appendChild(pr);
+  const desc = document.createElement("p"); desc.className="slide__desc"; desc.textContent=getDescription(p);
 
   const row = document.createElement("div"); row.style.display="flex"; row.style.gap="8px"; row.style.flexWrap="wrap";
-  const playBtn = document.createElement("button"); playBtn.className="btn primary"; playBtn.textContent="Play"; playBtn.addEventListener("click",()=> openLightbox(p));
-  const demo = document.createElement("a"); demo.className="btn"; demo.href=p.linkDemo; demo.target="_blank"; demo.rel="noopener"; demo.textContent="Demo"; demo.addEventListener("click",()=> Analytics.onCTAClick("demo", p));
-  const store = document.createElement("a"); store.className="btn"; store.href=p.linkStore; store.target="_blank"; store.rel="noopener"; store.textContent="Store"; store.addEventListener("click",()=> Analytics.onCTAClick("store", p));
-  row.append(playBtn, demo, store);
+  const playBtn = document.createElement("button"); playBtn.className="btn primary"; playBtn.textContent=T.play; playBtn.addEventListener("click",()=> onPlay(p));
+  const store = document.createElement("a"); store.className="btn"; store.href=p.linkStore; store.target="_blank"; store.rel="noopener"; store.textContent=T.store; store.addEventListener("click",()=> Analytics.onCTAClick("store", p));
+  row.append(playBtn, store);
 
-  body.append(h3,tags,desc,row);
+  body.append(h3,tags,meta,desc,row);
   li.append(media, body);
   return li;
+}
+
+function onPlay(project){
+  const handheld = isHandheld();
+  const targetUrl = project.linkDemo || project.playable?.src || "#";
+  if (handheld){
+    window.open(targetUrl, "_blank", "noopener");
+    Analytics.onCTAClick("play_newtab", project);
+  } else {
+    openLightbox(project, targetUrl);
+  }
 }
 
 function buildDots(n){
@@ -156,88 +226,61 @@ function buildDots(n){
   }
 }
 
+function onDown(e){ state.dragging=true; state.startX=e.clientX; state.scrollX = el.viewport.scrollLeft; el.viewport.setPointerCapture(e.pointerId); }
+function onMove(e){ if (!state.dragging) return; const dx = e.clientX - state.startX; el.viewport.scrollLeft = state.scrollX - dx; if (Math.abs(dx)>6) e.preventDefault(); }
+function onUp(){ if (!state.dragging) return; state.dragging=false; const slideW = el.track.querySelector(".slide")?.getBoundingClientRect().width || 1; const targetIndex = Math.round(el.viewport.scrollLeft / (slideW + 12)); snapTo(targetIndex); }
+
 function snapTo(i){
   const count = state.filtered.length;
   state.index = Math.max(0, Math.min(i, count-1));
   const slide = el.track.querySelectorAll(".slide")[state.index];
   if (!slide) return;
-  const slideRect = slide.getBoundingClientRect();
-  const vpRect = el.viewport.getBoundingClientRect();
-  const delta = slide.offsetLeft - el.viewport.scrollLeft; // left within track
-  // smooth scroll via rAF
+  const delta = slide.offsetLeft - el.viewport.scrollLeft;
   smoothScrollTo(el.viewport, delta, 200);
-
-  // update dots
   const dots = el.dots.querySelectorAll(".dot");
   dots.forEach((d,idx)=>{ d.classList.toggle("is-active", idx===state.index); d.setAttribute("aria-selected", idx===state.index ? "true":"false"); });
 }
 
 function smoothScrollTo(container, deltaLeft, duration=200){
-  const start = container.scrollLeft;
-  const end = deltaLeft + start;
-  const t0 = performance.now();
-  (function tick(t){
-    const p = Math.min(1, (t - t0) / duration);
-    const ease = p<.5 ? 2*p*p : -1+(4-2*p)*p; // easeInOutQuad
-    container.scrollLeft = start + (end - start) * ease;
-    if (p<1) requestAnimationFrame(tick);
-  })(t0);
+  const start = container.scrollLeft; const end = deltaLeft + start; const t0 = performance.now();
+  (function tick(t){ const p = Math.min(1, (t - t0) / duration); const ease = p<.5 ? 2*p*p : -1+(4-2*p)*p; container.scrollLeft = start + (end - start) * ease; if (p<1) requestAnimationFrame(tick); })(t0);
 }
 
-/* Lightbox — тот же код, адаптированный */
-let prevFocus=null, activeProject=null, rafPlay=null, t00=0, ctx=null;
-function openLightbox(project){
+/* Lightbox + orientation */
+let prevFocus=null, activeProject=null;
+function openLightbox(project, url){
   activeProject = project; prevFocus=document.activeElement;
-  el.lightbox.setAttribute("aria-hidden","false");
-  document.body.style.overflow="hidden";
+  el.lightbox.setAttribute("aria-hidden","false"); document.body.style.overflow="hidden";
   document.getElementById("lightbox-title").textContent = project.title;
-  el.projectDesc.textContent = project.description;
-  el.projectTech.innerHTML = project.tech.map(t=>`<li class="tag">${t}</li>`).join("");
-  el.demoLink.href = project.linkDemo; el.storeLink.href = project.linkStore;
-  [el.playableFrame, el.playableCanvas, el.playableVideo].forEach(n=> n.hidden=true);
+  el.projectDesc.textContent = getDescription(project);
+  el.projectTech.innerHTML = project.tags.map(t=>`<li class="tag">${t}</li>`).join("");
+  el.storeLink.href = project.linkStore;
 
-  if (project.playable.type==="iframe"){ el.playableFrame.hidden=false; el.playableFrame.src=project.playable.src; }
-  else if (project.playable.type==="inline-canvas"){ el.playableCanvas.hidden=false; startInlinePlayable(el.playableCanvas); }
-  else { el.playableVideo.hidden=false; el.playableVideo.poster=project.playable.poster||""; el.playableVideo.src=project.playable.src; }
+  state.orientation = "portrait";
+  el.phoneFrame.classList.remove("landscape");
+  el.playableFrame.src = url;
 
   trapFocus(el.lightbox); el.lightbox.querySelector(".lightbox__dialog").focus();
   Analytics.onPlayableOpen(project);
 }
 function closeLightbox(){
   if (el.lightbox.getAttribute("aria-hidden")==="true") return;
-  el.lightbox.setAttribute("aria-hidden","true");
-  document.body.style.overflow="";
+  el.lightbox.setAttribute("aria-hidden","true"); document.body.style.overflow="";
   el.playableFrame.src="about:blank";
-  el.playableVideo.pause(); el.playableVideo.removeAttribute("src"); el.playableVideo.load();
-  stopInlinePlayable();
   Analytics.onPlayableClose(activeProject);
   activeProject=null;
   if (prevFocus) prevFocus.focus();
 }
 document.getElementById("lightboxClose").addEventListener("click", closeLightbox);
 el.lightbox.addEventListener("click",(e)=>{ if (e.target.hasAttribute("data-close")) closeLightbox(); });
-document.addEventListener("keydown",(e)=>{ if (e.key==="Escape") closeLightbox(); });
+
+function toggleOrientation(){
+  state.orientation = state.orientation === "portrait" ? "landscape" : "portrait";
+  el.phoneFrame.classList.toggle("landscape", state.orientation === "landscape");
+}
 
 function trapFocus(container){
-  const sels = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, video, audio, [tabindex]:not([tabindex="-1"])';
-  const nodes = container.querySelectorAll(sels); const first=nodes[0], last=nodes[nodes.length-1];
-  container.onkeydown = (e)=>{
-    if (e.key!=="Tab") return;
-    if (e.shiftKey && document.activeElement===first){ last.focus(); e.preventDefault(); }
-    else if (!e.shiftKey && document.activeElement===last){ first.focus(); e.preventDefault(); }
-  };
+  const sels='a[href],area[href],input:not([disabled]),select:not([disabled]),textarea:not([disabled]),button:not([disabled]),iframe,video,audio,[tabindex]:not([tabindex="-1"])';
+  const nodes=container.querySelectorAll(sels); const first=nodes[0], last=nodes[nodes.length-1];
+  container.onkeydown=(e)=>{ if (e.key!=="Tab") return; if (e.shiftKey && document.activeElement===first){ last.focus(); e.preventDefault(); } else if (!e.shiftKey && document.activeElement===last){ first.focus(); e.preventDefault(); } };
 }
-function startInlinePlayable(canvas){
-  ctx = canvas.getContext("2d"); t00 = performance.now();
-  const loop = (t)=>{
-    const w=canvas.width, h=canvas.height;
-    ctx.fillStyle="#000"; ctx.fillRect(0,0,w,h);
-    const r=20, x=(w/2)+Math.sin(t/500)*(w/3), y=(h/2)+Math.cos(t/800)*(h/3);
-    ctx.fillStyle="#2563eb"; ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fill();
-    rafPlay=requestAnimationFrame(loop);
-  }; rafPlay=requestAnimationFrame(loop);
-}
-function stopInlinePlayable(){ if (rafPlay) cancelAnimationFrame(rafPlay); }
-
-/* Keyboard shortcut */
-document.addEventListener("keydown",(e)=>{ if (e.key==="/"){ e.preventDefault(); el.search.focus(); }});

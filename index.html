@@ -3,27 +3,20 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Playable Ads Портфолио — Aleksey</title>
+  <title data-i18n="title">Playable Ads Портфолио — Aleksey</title>
   <meta name="description" content="Портфолио Playable Ads: интерактивные демо, кейсы, технические детали.">
   <link rel="preconnect" href="https://cdn.example.com" crossorigin>
-  <link rel="preload" as="image" href="assets/cover-placeholder.avif" imagesrcset="assets/cover-placeholder.avif 1x, assets/cover-placeholder@2x.avif 2x" />
   <meta name="theme-color" content="#0b0b0f" media="(prefers-color-scheme: dark)">
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-  <!-- OG/Twitter -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Playable Ads Портфолио — Aleksey">
   <meta property="og:description" content="Лёгкий каталог playable реклам с live-демо.">
   <meta property="og:image" content="assets/og-cover.png">
   <meta name="twitter:card" content="summary_large_image">
-  <!-- Icons -->
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-  <!-- Styles -->
   <link rel="stylesheet" href="styles.css">
-  <script>
-    document.documentElement.classList.remove('no-js'); // hint for CSS
-  </script>
-  <!-- schema.org Portfolio -->
+  <script>document.documentElement.classList.remove('no-js');</script>
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -31,7 +24,6 @@
     "name":"Playable Ads Портфолио — Aleksey",
     "about":{"@type":"CreativeWork","name":"Playable Advertising"},
     "creator":{"@type":"Person","name":"Aleksey","jobTitle":"Senior Playable Ads Developer"},
-    "isPartOf":{"@type":"WebSite","name":"Aleksey Portfolio"},
     "inLanguage":"ru"
   }
   </script>
@@ -48,33 +40,44 @@
 
 <main id="main" tabindex="-1">
   <section class="hero" aria-labelledby="hero-title">
-    <h1 id="hero-title">Playable Ads портфолио</h1>
-    <p class="tagline">Микро-игры с высокой конверсией. Чистый код. 60fps. Мобильные приоритет.</p>
+    <h1 id="hero-title" data-i18n="heroTitle">Playable Ads портфолио</h1>
+    <p class="tagline" data-i18n="tagline">Микро-игры с высокой конверсией. Чистый код. 60fps. Mobile-first.</p>
     <div class="cta-row">
-      <a class="btn primary" href="#contact" data-analytics="CTA">Связаться</a>
-      <span class="count" id="projectCount" aria-live="polite">0 проектов</span>
+      <a class="btn primary" href="#contact" data-analytics="CTA" data-i18n="contactCta">Связаться</a>
+      <span class="count" id="projectCount" aria-live="polite">0</span>
     </div>
   </section>
 
   <section class="controls" aria-label="Фильтры и поиск">
-    <div class="filters" role="group" aria-label="Фильтр по тегам">
-      <!-- Теги генерятся JS -->
-      <button class="chip is-active" data-tag="all" aria-pressed="true">Все</button>
-      <div id="tagContainer" class="tag-container"></div>
-    </div>
-    <div class="sort-search">
-      <label class="visually-hidden" for="sort">Сортировка</label>
-      <select id="sort" class="select">
-        <option value="newest">Новизна</option>
-        <option value="title">Название A→Z</option>
-        <option value="popular">Популярность</option>
-      </select>
-      <label class="visually-hidden" for="search">Поиск</label>
-      <input id="search" class="input" type="search" placeholder="Поиск по названию/тегам" inputmode="search" />
-      <button id="reset" class="btn ghost">Сброс</button>
+    <div class="filters-rows">
+      <div class="row">
+        <label for="genre" data-i18n="genre">Жанр</label>
+        <select id="genre" class="select">
+          <option value="all" data-i18n="allGenres">Все жанры</option>
+        </select>
+      </div>
+      <div class="row">
+        <label for="forProject" data-i18n="forProject">Проект</label>
+        <select id="forProject" class="select">
+          <option value="all" data-i18n="allProjects">Все проекты</option>
+        </select>
+      </div>
+      <div class="row">
+        <label for="order" data-i18n="order">Порядок</label>
+        <select id="order" class="select">
+          <option value="newest" data-i18n="newer">Новее</option>
+          <option value="oldest" data-i18n="older">Старее</option>
+        </select>
+      </div>
+      <div class="row grow">
+        <label class="visually-hidden" for="search" data-i18n="search">Поиск</label>
+        <input id="search" class="input" type="search" placeholder="Поиск по названию/тегам" inputmode="search" data-i18n-placeholder="searchPlaceholder" />
+      </div>
+      <button id="reset" class="btn ghost" data-i18n="reset">Сброс</button>
+
       <label class="toggle">
         <input type="checkbox" id="masonryToggle" />
-        <span>Masonry-вид</span>
+        <span data-i18n="masonry">Masonry-вид</span>
       </label>
     </div>
   </section>
@@ -89,34 +92,46 @@
   <div class="lightbox__backdrop" data-close></div>
   <article class="lightbox__dialog" role="document">
     <header class="lightbox__header">
-      <h2 id="lightbox-title">Заголовок</h2>
-      <button class="btn icon" id="lightboxClose" aria-label="Закрыть">✕</button>
+      <h2 id="lightbox-title">—</h2>
+      <div class="lightbox__actions">
+        <button class="btn" id="orientationToggle" aria-label="Toggle orientation" data-i18n="toggleOrientation">Ориентация</button>
+        <button class="btn icon" id="lightboxClose" aria-label="Закрыть">✕</button>
+      </div>
     </header>
     <div class="lightbox__body">
-      <!-- Вариант A: iframe -->
-      <iframe id="playableFrame" title="Playable demo" loading="lazy" sandbox="allow-scripts allow-same-origin" allow="fullscreen; gamepad; accelerometer; gyroscope" hidden></iframe>
-      <!-- Вариант B: inline canvas -->
-      <canvas id="playableCanvas" hidden width="480" height="800" aria-label="Inline playable canvas"></canvas>
-      <!-- Вариант C: video preview -->
-      <video id="playableVideo" hidden controls playsinline preload="metadata" poster="" aria-label="Видео-превью"></video>
+      <div class="phone-frame portrait" id="phoneFrame" aria-label="Device frame">
+        <div class="notch" aria-hidden="true"></div>
+        <iframe id="playableFrame" title="Playable demo" loading="lazy"
+                sandbox="allow-scripts allow-same-origin"
+                allow="fullscreen; gamepad; accelerometer; gyroscope"></iframe>
+      </div>
       <p id="projectDesc" class="desc"></p>
       <ul id="projectTech" class="tech-list" aria-label="Технологии"></ul>
     </div>
     <footer class="lightbox__footer">
-      <a id="demoLink" class="btn primary" target="_blank" rel="noopener" href="#" data-analytics="Demo">Открыть демо</a>
-      <a id="storeLink" class="btn" target="_blank" rel="noopener" href="#" data-analytics="Store">Страница в магазине</a>
+      <a id="storeLink" class="btn" target="_blank" rel="noopener" href="#" data-analytics="Store" data-i18n="store">Страница в магазине</a>
     </footer>
   </article>
 </div>
 
 <section id="contact" class="contact" aria-labelledby="contact-title">
-  <h2 id="contact-title">Контакты</h2>
-  <p>Открыт к контрактам и коллаборациям. Пишите:</p>
-  <p><a href="mailto:aleksey@example.com" class="btn primary" data-analytics="Contact">aleksey@example.com</a></p>
+  <h2 id="contact-title" data-i18n="contactsTitle">Контакты</h2>
+  <p data-i18n="contactsText">Открыт к контрактам и коллаборациям.</p>
+  <div class="contact-links">
+    <a href="mailto:aleksey@example.com" class="btn primary" aria-label="Email" data-analytics="ContactEmail">✉️ Email</a>
+    <a href="https://t.me/your_handle" class="btn" target="_blank" rel="noopener" aria-label="Telegram" data-analytics="ContactTelegram">
+      <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.9 16.2 9.7 20c.4 0 .6-.2.8-.4l1.9-1.8 3.9 2.9c.7.4 1.2.2 1.4-.7l2.6-12.1c.3-1.1-.4-1.6-1.1-1.3L3.6 10.6c-1 .4-1 1 0 1.3l4.4 1.4 10.1-6.4c.5-.3.9-.1.5.2l-8.7 8.9Z" fill="currentColor"/></svg>
+      Telegram
+    </a>
+    <a href="https://www.linkedin.com/in/your_handle/" class="btn" target="_blank" rel="noopener" aria-label="LinkedIn" data-analytics="ContactLinkedIn">
+      <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8.5h4V23h-4V8.5zm7 0h3.8v2h.1c.5-1 1.8-2.1 3.7-2.1 4 0 4.7 2.7 4.7 6.2V23h-4v-6.5c0-1.6 0-3.6-2.2-3.6-2.2 0-2.6 1.7-2.6 3.5V23h-4V8.5z" fill="currentColor"/></svg>
+      LinkedIn
+    </a>
+  </div>
 </section>
 
 <footer class="site-footer" role="contentinfo">
-  <small>© <span id="year"></span> Aleksey. Сделано на чистом HTML/CSS/JS. <a href="carousel/index.html">Версия Carousel →</a></small>
+  <small>© <span id="year"></span> Aleksey. <a href="carousel/index.html">Версия Carousel →</a></small>
 </footer>
 
 <script defer src="app.js"></script>

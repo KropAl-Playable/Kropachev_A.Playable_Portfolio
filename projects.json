@@ -1,0 +1,251 @@
+{
+  "projects": [
+    {
+      "id": "desert-restorer",
+      "title": "Desert Restorer",
+      "genres": ["Hypercore", "RPG"],
+      "forProject": "Desert City",
+      "tags": ["Canvas", "WebGL", "3D", "Joystick", "Third-person"],
+      "cover": {
+        "avif": "assets/match3.avif",
+        "webp": "assets/match3.webp",
+        "fallback": "assets/match3.jpg"
+      },
+      "description": "Сбор ресурсов, апгрейды, управление джойстиком.",
+      "description_en": "Collecting resources, upgrades, joystick control.",
+      "date": "2024-12-28",
+      "popularity": 87,
+      "linkDemo": "projects/desert_city/desert_restorer.html",
+      "linkStore": "https://store.example.com/app/match3",
+      "playable": { "type": "iframe", "src": "projects/desert_city/desert_restorer.html" }
+    },
+    {
+      "id": "truck-upgrade",
+      "title": "Truck Upgrade",
+      "genres": ["Upgrade", "Casual"],
+      "forProject": "Desert City",
+      "tags": ["3D", "Upgrade", "WebGL"],
+      "cover": {
+        "avif": "assets/rpg.avif",
+        "webp": "assets/rpg.webp",
+        "fallback": "assets/rpg.jpg"
+      },
+      "description": "Апгрейд грузовика",
+      "description_en": "Upgrading a truck",
+      "date": "2024-12-04",
+      "popularity": 92,
+      "linkDemo": "projects/desert_city/truck_upgrade.html",
+      "linkStore": "https://store.example.com/app/rpg",
+      "playable": { "type": "iframe", "src": "projects/desert_city/truck_upgrade.html" }
+    },
+    {
+      "id": "water-conveyor",
+      "title": "Water Conveyor",
+      "genres": ["Upgrade", "2D", "Hypercore"],
+      "forProject": "Desert City",
+      "tags": ["2D", "Upgrade", "WebGL", "ECS", "CreateJS"],
+      "cover": {
+        "avif": "assets/rpg.avif",
+        "webp": "assets/rpg.webp",
+        "fallback": "assets/rpg.jpg"
+      },
+      "description": "Апгрейдим конвейер, нанимаем рабочих",
+      "description_en": "Upgrading the conveyor, hiring workers",
+      "date": "2024-05-29",
+      "popularity": 92,
+      "linkDemo": "projects/desert_city/water_conveyor.html",
+      "linkStore": "https://store.example.com/app/rpg",
+      "playable": { "type": "iframe", "src": "projects/desert_city/water_conveyor.html" }
+    },
+    {
+      "id": "upgrade-collect",
+      "title": "Upgrade, Collect!",
+      "genres": ["Upgrade", "2D", "Collecting"],
+      "forProject": "Desert City",
+      "tags": ["2D", "Upgrade", "WebGL", "ECS", "CreateJS"],
+      "cover": {
+        "avif": "assets/rpg.avif",
+        "webp": "assets/rpg.webp",
+        "fallback": "assets/rpg.jpg"
+      },
+      "description": "Апгрейд сооружений, сбор наград",
+      "description_en": "Upgrading facilities, collecting rewards",
+      "date": "2024-04-11",
+      "popularity": 92,
+      "linkDemo": "projects/desert_city/upgrade_collect.html",
+      "linkStore": "https://store.example.com/app/rpg",
+      "playable": { "type": "iframe", "src": "projects/desert_city/upgrade_collect.html" }
+    },
+    {
+      "id": "collect-fight",
+      "title": "Collect, Fight!",
+      "genres": ["Upgrade", "2D", "Collecting", "Fighting"],
+      "forProject": "Desert City",
+      "tags": ["2D", "Upgrade", "WebGL", "ECS", "CreateJS"],
+      "cover": {
+        "avif": "assets/rpg.avif",
+        "webp": "assets/rpg.webp",
+        "fallback": "assets/rpg.jpg"
+      },
+      "description": "Открываем сундук с карточками, сражаемся с врагами",
+      "description_en": "Opening a lootbox with cards, fighting enemies",
+      "date": "2024-05-24",
+      "popularity": 92,
+      "linkDemo": "projects/desert_city/collect_fight.html",
+      "linkStore": "https://store.example.com/app/rpg",
+      "playable": { "type": "iframe", "src": "projects/desert_city/collect_fight.html" }
+    },
+    {
+      "id": "warhouse",
+      "title": "Warhouse",
+      "genres": ["3D", "RPG", "Hypercore", "Stacking"],
+      "forProject": "OneState: RolePlay",
+      "tags": ["WebGL", "ECS", "3D", "Joystick", "Third-person"],
+      "cover": {
+        "avif": "assets/hyper.avif",
+        "webp": "assets/hyper.webp",
+        "fallback": "assets/hyper.jpg"
+      },
+      "description": "Сбор ресурсов, апгрейды, найм NPC, управление джойстиком.",
+      "description_en": "Collecting resources, upgrades, hiring NPCs, joystick control.",
+      "date": "2025-09-03",
+      "popularity": 74,
+      "linkDemo": "projects/one_state/warhouse.html",
+      "linkStore": "https://store.example.com/app/hyper",
+      "playable": { "type": "iframe", "src": "projects/one_state/warhouse.html" }
+    },
+    {
+      "id": "car-tuning",
+      "title": "CarTuning",
+      "genres": ["3D", "Upgrade", "Racing"],
+      "forProject": "OneState: RolePlay",
+      "tags": ["WebGL", "ECS", "3D", "Racing", "Upgrade"],
+      "cover": {
+        "avif": "assets/hyper.avif",
+        "webp": "assets/hyper.webp",
+        "fallback": "assets/hyper.jpg"
+      },
+      "description": "Апгрейд машины, гонки по прямой.",
+      "description_en": "Car upgrade, drag racing.",
+      "date": "2025-05-14",
+      "popularity": 74,
+      "linkDemo": "projects/one_state/car_tuning_long.html",
+      "linkStore": "https://store.example.com/app/hyper",
+      "playable": { "type": "iframe", "src": "projects/one_state/car_tuning_long.html" }
+    },
+    {
+      "id": "improvement_car",
+      "title": "Improvement Car",
+      "genres": ["3D", "Upgrade"],
+      "forProject": "OneState: RolePlay",
+      "tags": ["WebGL", "ECS", "3D", "Upgrade"],
+      "cover": {
+        "avif": "assets/hyper.avif",
+        "webp": "assets/hyper.webp",
+        "fallback": "assets/hyper.jpg"
+      },
+      "description": "Апгрейд машины",
+      "description_en": "Car upgrade",
+      "date": "2025-07-14",
+      "popularity": 74,
+      "linkDemo": "projects/one_state/improvement_car.html",
+      "linkStore": "https://store.example.com/app/hyper",
+      "playable": { "type": "iframe", "src": "projects/one_state/improvement_car.html" }
+    },
+    {
+      "id": "ride-master",
+      "title": "RideMaster",
+      "genres": ["3D", "Physics", "Racing", "Casual"],
+      "forProject": "OneState: RolePlay",
+      "tags": ["WebGL", "ECS", "3D"],
+      "cover": {
+        "avif": "assets/hyper.avif",
+        "webp": "assets/hyper.webp",
+        "fallback": "assets/hyper.jpg"
+      },
+      "description": "Тестовое задание одной из студий, пытаемся доехать до финиша быстрее, чем мост развалится под нами",
+      "description_en": "Test task for one of the studios, we try to reach the finish line before the bridge collapses under us",
+      "date": "2025-02-19",
+      "popularity": 74,
+      "linkDemo": "projects/test_projects/ride_master.html",
+      "linkStore": "https://store.example.com/app/hyper",
+      "playable": { "type": "iframe", "src": "projects/test_projects/ride_master.html" }
+    },
+    {
+      "id": "lumber_ugprade",
+      "title": "Lumber Upgrade",
+      "genres": ["3D", "Physics", "Racing", "Casual", "Hypercore"],
+      "forProject": "OneState: RolePlay",
+      "tags": ["WebGL", "ECS", "3D", "Hypercore", "Upgrade", "Physics", "Joystick"],
+      "cover": {
+        "avif": "assets/hyper.avif",
+        "webp": "assets/hyper.webp",
+        "fallback": "assets/hyper.jpg"
+      },
+      "description": "Сбор и продажа ресурсов, апгрейд машины, апгрейд фасилити. По ряду причин проект не был закончен.",
+      "description_en": "Collecting and selling resources, car upgrades, facility upgrades. For a number of reasons, the project was not completed.",
+      "date": "2025-04-29",
+      "popularity": 74,
+      "linkDemo": "projects/idle_lumber/index.html",
+      "linkStore": "https://store.example.com/app/hyper",
+      "playable": { "type": "iframe", "src": "projects/idle_lumber/index.html" }
+    },
+    {
+      "id": "tutorial",
+      "title": "Tutorial Level",
+      "genres": ["3D", "Physics", "Casual", "Upgrade"],
+      "forProject": "Army Forces: Idle Tycoon",
+      "tags": ["WebGL", "ECS", "3D"],
+      "cover": {
+        "avif": "assets/hyper.avif",
+        "webp": "assets/hyper.webp",
+        "fallback": "assets/hyper.jpg"
+      },
+      "description": "Имитация туториального уровня для игры в жанре Idle Tycoon",
+      "description_en": "Tutorial level simulation for an Idle Tycoon game",
+      "date": "2025-01-28",
+      "popularity": 74,
+      "linkDemo": "projects/army_forces/tutorial_3D.html",
+      "linkStore": "https://store.example.com/app/hyper",
+      "playable": { "type": "iframe", "src": "projects/army_forces/tutorial_3D.html" }
+    },
+    {
+      "id": "training-tailor",
+      "title": "Training Tailor",
+      "genres": ["2D", "Casual", "Upgrade"],
+      "forProject": "Army Forces: Idle Tycoon",
+      "tags": ["CreateJS", "ECS", "2D"],
+      "cover": {
+        "avif": "assets/hyper.avif",
+        "webp": "assets/hyper.webp",
+        "fallback": "assets/hyper.jpg"
+      },
+      "description": "Выбираем тренировки для солдат, прокачиваем их",
+      "description_en": "Choosing training for soldiers, upgrading them",
+      "date": "2024-03-23",
+      "popularity": 74,
+      "linkDemo": "projects/army_forces/training_tailor.html",
+      "linkStore": "https://store.example.com/app/hyper",
+      "playable": { "type": "iframe", "src": "projects/army_forces/training_tailor.html" }
+    },
+    {
+      "id": "upgrade-soldier",
+      "title": "Upgrade Soldier",
+      "genres": ["2D", "Casual", "Upgrade"],
+      "forProject": "Army Forces: Idle Tycoon",
+      "tags": ["CreateJS", "ECS", "2D"],
+      "cover": {
+        "avif": "assets/hyper.avif",
+        "webp": "assets/hyper.webp",
+        "fallback": "assets/hyper.jpg"
+      },
+      "description": "Прокачиваем навыки солдата",
+      "description_en": "Upgrading soldier skills",
+      "date": "2023-12-08",
+      "popularity": 74,
+      "linkDemo": "projects/army_forces/upgrade_soldier.html",
+      "linkStore": "https://store.example.com/app/hyper",
+      "playable": { "type": "iframe", "src": "projects/army_forces/upgrade_soldier.html" }
+    }
+  ]
+}

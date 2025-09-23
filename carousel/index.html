@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Playable Ads — Carousel</title>
+  <title data-i18n="title">Playable Ads — Carousel</title>
   <meta name="description" content="Портфолио Playable Ads с горизонтальной каруселью и свайпом.">
   <link rel="preconnect" href="https://cdn.example.com" crossorigin>
   <meta name="theme-color" content="#0b0b0f" media="(prefers-color-scheme: dark)">
@@ -15,57 +15,67 @@
 <body>
 <header class="site-header" role="banner">
   <a class="brand" href="../index.html">← Grid</a>
-  <h1 class="title">Playable Ads — Carousel</h1>
+  <h1 class="title" data-i18n="heroTitle">Playable Ads — Carousel</h1>
   <button id="themeToggle" class="btn ghost" aria-pressed="false" aria-label="Переключить тему">🌓</button>
 </header>
 
 <main id="main" tabindex="-1">
   <section class="controls" aria-label="Фильтры">
-    <div class="filters" role="group" aria-label="Фильтр по тегам">
-      <button class="chip is-active" data-tag="all" aria-pressed="true">Все</button>
-      <div id="tagContainer" class="tag-container"></div>
-    </div>
-    <div class="sort-search">
-      <select id="sort" class="select" aria-label="Сортировка">
-        <option value="newest">Новизна</option>
-        <option value="title">Название A→Z</option>
-        <option value="popular">Популярность</option>
+    <div class="filters">
+      <label for="genre" data-i18n="genre">Жанр</label>
+      <select id="genre" class="select">
+        <option value="all" data-i18n="allGenres">Все жанры</option>
       </select>
-      <input id="search" class="input" type="search" placeholder="Поиск…">
-      <button id="reset" class="btn ghost">Сброс</button>
+
+      <label for="forProject" data-i18n="forProject">Проект</label>
+      <select id="forProject" class="select">
+        <option value="all" data-i18n="allProjects">Все проекты</option>
+      </select>
+
+      <label for="order" data-i18n="order">Порядок</label>
+      <select id="order" class="select">
+        <option value="newest" data-i18n="newer">Новее</option>
+        <option value="oldest" data-i18n="older">Старее</option>
+      </select>
+
+      <input id="search" class="input" type="search" placeholder="Поиск…" data-i18n-placeholder="searchPlaceholder" />
+      <button id="reset" class="btn ghost" data-i18n="reset">Сброс</button>
     </div>
   </section>
 
   <section class="carousel" aria-roledescription="carousel" aria-label="Галерея проектов">
     <button class="nav prev" aria-label="Назад" id="prev">◀</button>
     <div class="track-viewport" id="viewport" tabindex="0">
-      <ul class="track" id="track" role="list">
-        <!-- Slides генерятся JS -->
-      </ul>
+      <ul class="track" id="track" role="list"></ul>
     </div>
     <button class="nav next" aria-label="Вперёд" id="next">▶</button>
   </section>
   <div class="dots" id="dots" role="tablist" aria-label="Индикаторы"></div>
 </main>
 
-<!-- Модал/лайтбокс такой же -->
+<!-- Shared Lightbox with phone frame -->
 <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-title" aria-hidden="true">
   <div class="lightbox__backdrop" data-close></div>
   <article class="lightbox__dialog" role="document">
     <header class="lightbox__header">
-      <h2 id="lightbox-title">Заголовок</h2>
-      <button class="btn icon" id="lightboxClose" aria-label="Закрыть">✕</button>
+      <h2 id="lightbox-title">—</h2>
+      <div class="lightbox__actions">
+        <button class="btn" id="orientationToggle" data-i18n="toggleOrientation">Ориентация</button>
+        <button class="btn icon" id="lightboxClose" aria-label="Закрыть">✕</button>
+      </div>
     </header>
     <div class="lightbox__body">
-      <iframe id="playableFrame" title="Playable demo" loading="lazy" sandbox="allow-scripts allow-same-origin" allow="fullscreen; gamepad; accelerometer; gyroscope" hidden></iframe>
-      <canvas id="playableCanvas" hidden width="480" height="800" aria-label="Inline playable canvas"></canvas>
-      <video id="playableVideo" hidden controls playsinline preload="metadata" poster=""></video>
+      <div class="phone-frame portrait" id="phoneFrame">
+        <div class="notch" aria-hidden="true"></div>
+        <iframe id="playableFrame" title="Playable demo" loading="lazy"
+                sandbox="allow-scripts allow-same-origin"
+                allow="fullscreen; gamepad; accelerometer; gyroscope"></iframe>
+      </div>
       <p id="projectDesc" class="desc"></p>
       <ul id="projectTech" class="tech-list"></ul>
     </div>
     <footer class="lightbox__footer">
-      <a id="demoLink" class="btn primary" target="_blank" rel="noopener" href="#" data-analytics="Demo">Открыть демо</a>
-      <a id="storeLink" class="btn" target="_blank" rel="noopener" href="#" data-analytics="Store">Страница в магазине</a>
+      <a id="storeLink" class="btn" target="_blank" rel="noopener" href="#" data-analytics="Store" data-i18n="store">Страница в магазине</a>
     </footer>
   </article>
 </div>
