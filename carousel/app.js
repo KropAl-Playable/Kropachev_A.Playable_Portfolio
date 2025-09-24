@@ -3,9 +3,9 @@ const USER_LANG = (navigator.language || navigator.userLanguage || "ru").toLower
 const IS_RU = USER_LANG.startsWith("ru");
 const I18N = {
   ru: {
-    title: "Playable Ads Портфолио — Aleksey",
+    title: "Playable Ads Портфолио — Kropachev Aleksey",
     heroTitle: "Playable Ads — Carousel",
-    genre: "Жанр",
+    genre: "Тег",
     forProject: "Проект",
     order: "Порядок",
     newer: "Новее",
@@ -15,13 +15,13 @@ const I18N = {
     play: "Play",
     store: "Страница в магазине",
     toggleOrientation: "Ориентация",
-    allGenres: "Все жанры",
+    allGenres: "Все теги",
     allProjects: "Все проекты"
   },
   en: {
-    title: "Playable Ads Portfolio — Aleksey",
+    title: "Playable Ads Portfolio — Kropachev Aleksey",
     heroTitle: "Playable Ads — Carousel",
-    genre: "Genre",
+    genre: "Tag",
     forProject: "Client/Project",
     order: "Order",
     newer: "Newer",
@@ -31,7 +31,7 @@ const I18N = {
     play: "Play",
     store: "Store page",
     toggleOrientation: "Orientation",
-    allGenres: "All genres",
+    allGenres: "All tags",
     allProjects: "All projects"
   }
 };
@@ -49,6 +49,7 @@ function applyI18N(){
     if (T[key]) el.setAttribute("placeholder", T[key]);
   });
 }
+applyI18N();
 function getDescription(p){
   return IS_RU ? (p.description || p.description_en || "") : (p.description_en || p.description || "");
 }
@@ -96,9 +97,8 @@ const Analytics = {
 };
 
 let ALL = [];
-let state = { genre:"all", forProject:"all", order:"newest", search:"", index:0, filtered:[], dragging:false, startX:0, scrollX:0, active:null, orientation:"portrait" };
+let state = { genre:"all", forProject:"all", order:"newest", search:"", index:0, filtered:[], dragging:false, startX:0, startY:0, moved:false, startScrollX:0, orientation:"portrait" };
 
-applyI18N();
 boot();
 async function boot(){
   try{
@@ -140,17 +140,18 @@ function bindControls(){
     document.documentElement.style.colorScheme = dark ? "dark" : "light";
   });
 
-  el.prev.addEventListener("click", ()=> snapTo(state.index-1));
-  el.next.addEventListener("click", ()=> snapTo(state.index+1));
-  el.viewport.addEventListener("keydown", (e)=>{ if (e.key==="ArrowLeft") snapTo(state.index-1); if (e.key==="ArrowRight") snapTo(state.index+1); });
+  // Кнопки с более плавным скроллом
+  el.prev.addEventListener("click", ()=> snapTo(state.index-1, 320));
+  el.next.addEventListener("click", ()=> snapTo(state.index+1, 320));
+  el.viewport.addEventListener("keydown", (e)=>{ if (e.key==="ArrowLeft") snapTo(state.index-1, 320); if (e.key==="ArrowRight") snapTo(state.index+1, 320); });
 
-  // drag/touch
-  const vp=el.viewport;
-  vp.addEventListener("pointerdown", onDown, {passive:true});
-  vp.addEventListener("pointermove", onMove, {passive:false});
-  vp.addEventListener("pointerup", onUp, {passive:true});
-  vp.addEventListener("pointercancel", onUp, {passive:true});
-  vp.addEventListener("pointerleave", onUp, {passive:true});
+  // Свайп по ЛЮБОМУ элементу внутри карусели
+  // Вешаем на track, но pointer capture берём на viewport, чтобы конкурировать с внутренними элементами
+  el.track.addEventListener("pointerdown", onDown, {passive:true});
+  el.track.addEventListener("pointermove", onMove, {passive:false});
+  el.track.addEventListener("pointerup", onUp, {passive:true});
+  el.track.addEventListener("pointercancel", onUp, {passive:true});
+  el.track.addEventListener("pointerleave", onUp, {passive:true});
 
   document.addEventListener("keydown",(e)=>{ if (e.key==="Escape") closeLightbox(); });
   document.addEventListener("keydown",(e)=>{ if (e.key==="/"){ e.preventDefault(); el.search.focus(); }});
@@ -174,11 +175,12 @@ function render(){
   sorted.forEach(p => frag.appendChild(createSlide(p)));
   el.track.appendChild(frag);
   buildDots(sorted.length);
-  requestAnimationFrame(()=> snapTo(0));
+  requestAnimationFrame(()=> snapTo(0, 0));
 }
 
 function createSlide(p){
   const li = document.createElement("li"); li.className="slide"; li.role="listitem"; li.setAttribute("aria-label", p.title);
+
   const media = document.createElement("div"); media.className="slide__media";
   const picture = document.createElement("picture");
   picture.innerHTML = `
@@ -197,15 +199,23 @@ function createSlide(p){
   const desc = document.createElement("p"); desc.className="slide__desc"; desc.textContent=getDescription(p);
 
   const row = document.createElement("div"); row.style.display="flex"; row.style.gap="8px"; row.style.flexWrap="wrap";
-  const playBtn = document.createElement("button"); playBtn.className="btn primary"; playBtn.textContent=T.play; playBtn.addEventListener("click",()=> onPlay(p));
-  const store = document.createElement("a"); store.className="btn"; store.href=p.linkStore; store.target="_blank"; store.rel="noopener"; store.textContent=T.store; store.addEventListener("click",()=> Analytics.onCTAClick("store", p));
+  const playBtn = document.createElement("button"); playBtn.className="btn primary"; playBtn.textContent=T.play;
+  playBtn.addEventListener("click",(e)=>{ e.stopPropagation(); onPlay(p); });
+  const store = document.createElement("a"); store.className="btn"; store.href=p.linkStore; store.target="_blank"; store.rel="noopener"; store.textContent=T.store;
+  store.addEventListener("click",(e)=>{ e.stopPropagation(); Analytics.onCTAClick("store", p); });
   row.append(playBtn, store);
 
   body.append(h3,tags,meta,desc,row);
   li.append(media, body);
+
+  // Клик по карточке/превью
+  li.addEventListener("click", ()=> onPlay(p));
+  media.addEventListener("click", (e)=> { e.stopPropagation(); onPlay(p); });
+
   return li;
 }
 
+/* Логика Play */
 function onPlay(project){
   const handheld = isHandheld();
   const targetUrl = project.linkDemo || project.playable?.src || "#";
@@ -221,29 +231,64 @@ function buildDots(n){
   el.dots.innerHTML = "";
   for (let i=0;i<n;i++){
     const b = document.createElement("button"); b.className="dot"; b.setAttribute("role","tab"); b.setAttribute("aria-selected", i===0 ? "true" : "false");
-    b.addEventListener("click", ()=> snapTo(i));
+    b.addEventListener("click", ()=> snapTo(i, 320));
     el.dots.appendChild(b);
   }
 }
 
-function onDown(e){ state.dragging=true; state.startX=e.clientX; state.scrollX = el.viewport.scrollLeft; el.viewport.setPointerCapture(e.pointerId); }
-function onMove(e){ if (!state.dragging) return; const dx = e.clientX - state.startX; el.viewport.scrollLeft = state.scrollX - dx; if (Math.abs(dx)>6) e.preventDefault(); }
-function onUp(){ if (!state.dragging) return; state.dragging=false; const slideW = el.track.querySelector(".slide")?.getBoundingClientRect().width || 1; const targetIndex = Math.round(el.viewport.scrollLeft / (slideW + 12)); snapTo(targetIndex); }
+/* Свайп по любому элементу: подавление «ложных кликов» */
+function onDown(e){
+  state.dragging=true; state.moved=false;
+  state.startX=e.clientX; state.startY=e.clientY;
+  state.startScrollX = el.viewport.scrollLeft;
+  el.viewport.setPointerCapture(e.pointerId);
+}
+function onMove(e){
+  if (!state.dragging) return;
+  const dx = e.clientX - state.startX;
+  const dy = e.clientY - state.startY;
+  if (Math.abs(dx) > 6) state.moved = true; // был реальный свайп
+  // Если горизонтальная компонента доминирует — прокручиваем, предотвращаем клик/скролл страницы
+  if (Math.abs(dx) > Math.abs(dy)) {
+    el.viewport.scrollLeft = state.startScrollX - dx;
+    e.preventDefault();
+  }
+}
+function onUp(e){
+  if (!state.dragging) return;
+  state.dragging=false;
+  const slideW = el.track.querySelector(".slide")?.getBoundingClientRect().width || 1;
+  const gap = 10;
+  const targetIndex = Math.round(el.viewport.scrollLeft / (slideW + gap));
+  snapTo(targetIndex, 280);
 
-function snapTo(i){
+  // Если был свайп — блокируем ближайший click, чтобы не открывать Play случайно
+  if (state.moved) {
+    const handler = (ev)=>{ ev.stopPropagation(); ev.preventDefault(); el.track.removeEventListener("click", handler, true); };
+    el.track.addEventListener("click", handler, true);
+    setTimeout(()=> el.track.removeEventListener("click", handler, true), 0);
+  }
+}
+
+function snapTo(i, duration=300){
   const count = state.filtered.length;
   state.index = Math.max(0, Math.min(i, count-1));
   const slide = el.track.querySelectorAll(".slide")[state.index];
   if (!slide) return;
   const delta = slide.offsetLeft - el.viewport.scrollLeft;
-  smoothScrollTo(el.viewport, delta, 200);
+  smoothScrollTo(el.viewport, delta, duration);
   const dots = el.dots.querySelectorAll(".dot");
   dots.forEach((d,idx)=>{ d.classList.toggle("is-active", idx===state.index); d.setAttribute("aria-selected", idx===state.index ? "true":"false"); });
 }
 
-function smoothScrollTo(container, deltaLeft, duration=200){
+function smoothScrollTo(container, deltaLeft, duration=300){
   const start = container.scrollLeft; const end = deltaLeft + start; const t0 = performance.now();
-  (function tick(t){ const p = Math.min(1, (t - t0) / duration); const ease = p<.5 ? 2*p*p : -1+(4-2*p)*p; container.scrollLeft = start + (end - start) * ease; if (p<1) requestAnimationFrame(tick); })(t0);
+  (function tick(t){
+    const p = Math.min(1, (t - t0) / duration);
+    const ease = p<.5 ? 2*p*p : -1+(4-2*p)*p; // easeInOutQuad
+    container.scrollLeft = start + (end - start) * ease;
+    if (p<1) requestAnimationFrame(tick);
+  })(t0);
 }
 
 /* Lightbox + orientation */
@@ -273,12 +318,10 @@ function closeLightbox(){
 }
 document.getElementById("lightboxClose").addEventListener("click", closeLightbox);
 el.lightbox.addEventListener("click",(e)=>{ if (e.target.hasAttribute("data-close")) closeLightbox(); });
-
 function toggleOrientation(){
   state.orientation = state.orientation === "portrait" ? "landscape" : "portrait";
   el.phoneFrame.classList.toggle("landscape", state.orientation === "landscape");
 }
-
 function trapFocus(container){
   const sels='a[href],area[href],input:not([disabled]),select:not([disabled]),textarea:not([disabled]),button:not([disabled]),iframe,video,audio,[tabindex]:not([tabindex="-1"])';
   const nodes=container.querySelectorAll(sels); const first=nodes[0], last=nodes[nodes.length-1];

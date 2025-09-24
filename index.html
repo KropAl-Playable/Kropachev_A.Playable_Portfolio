@@ -21,16 +21,16 @@
   {
     "@context":"https://schema.org",
     "@type":"CollectionPage",
-    "name":"Playable Ads Портфолио — Aleksey",
+    "name":"Playable Ads Портфолио — Kropachev Aleksey",
     "about":{"@type":"CreativeWork","name":"Playable Advertising"},
-    "creator":{"@type":"Person","name":"Aleksey","jobTitle":"Senior Playable Ads Developer"},
+    "creator":{"@type":"Person","name":"Kropachev Aleksey","jobTitle":"Senior Playable Ads Developer"},
     "inLanguage":"ru"
   }
   </script>
 </head>
 <body>
 <header class="site-header" role="banner">
-  <a class="brand" href="/" aria-label="На главную — портфолио Aleksey">Aleksey • Playables</a>
+  <a class="brand" href="/" aria-label="На главную">Aleksey • Playables</a>
   <nav class="top-nav" aria-label="Основная навигация">
     <a href="#" data-view="grid" class="view-toggle is-active" aria-current="page">Grid</a>
     <a href="carousel/index.html" data-view="carousel" class="view-toggle">Carousel</a>
@@ -40,10 +40,9 @@
 
 <main id="main" tabindex="-1">
   <section class="hero" aria-labelledby="hero-title">
-    <h1 id="hero-title" data-i18n="heroTitle">Playable Ads портфолио</h1>
-    <p class="tagline" data-i18n="tagline">Микро-игры с высокой конверсией. Чистый код. 60fps. Mobile-first.</p>
+    <h1 id="hero-title" data-i18n="heroTitle">Playable Ads showreel</h1>
+    <p class="tagline" data-i18n="tagline">Специалист в области разработки Playable Ads с опытом в дизайне и программировании. Эксперт в создании интерактивных рекламных материалов, включая 2D/3D-анимацию и UI/UX-дизайн, с упором на результативность. Обладаю навыками управления проектами, формирования эффективных процессов разработки и внедрения нестандартных решений. Постоянно совершенствуюсь, изучаю новые технологии и подходы, чтобы повышать качество проектов и добиваться ощутимых результатов</p>
     <div class="cta-row">
-      <a class="btn primary" href="#contact" data-analytics="CTA" data-i18n="contactCta">Связаться</a>
       <span class="count" id="projectCount" aria-live="polite">0</span>
     </div>
   </section>
@@ -51,9 +50,9 @@
   <section class="controls" aria-label="Фильтры и поиск">
     <div class="filters-rows">
       <div class="row">
-        <label for="genre" data-i18n="genre">Жанр</label>
+        <label for="genre" data-i18n="genre">Тег</label>
         <select id="genre" class="select">
-          <option value="all" data-i18n="allGenres">Все жанры</option>
+          <option value="all" data-i18n="allGenres">Все теги</option>
         </select>
       </div>
       <div class="row">
@@ -82,9 +81,7 @@
     </div>
   </section>
 
-  <section id="gallery" class="gallery" aria-label="Галерея проектов">
-    <!-- Карточки генерятся JS -->
-  </section>
+  <section id="gallery" class="gallery" aria-label="Галерея проектов"></section>
 </main>
 
 <!-- Modal / Lightbox -->
@@ -114,24 +111,15 @@
   </article>
 </div>
 
-<section id="contact" class="contact" aria-labelledby="contact-title">
-  <h2 id="contact-title" data-i18n="contactsTitle">Контакты</h2>
-  <p data-i18n="contactsText">Открыт к контрактам и коллаборациям.</p>
-  <div class="contact-links">
-    <a href="mailto:aleksey@example.com" class="btn primary" aria-label="Email" data-analytics="ContactEmail">✉️ Email</a>
-    <a href="https://t.me/your_handle" class="btn" target="_blank" rel="noopener" aria-label="Telegram" data-analytics="ContactTelegram">
-      <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.9 16.2 9.7 20c.4 0 .6-.2.8-.4l1.9-1.8 3.9 2.9c.7.4 1.2.2 1.4-.7l2.6-12.1c.3-1.1-.4-1.6-1.1-1.3L3.6 10.6c-1 .4-1 1 0 1.3l4.4 1.4 10.1-6.4c.5-.3.9-.1.5.2l-8.7 8.9Z" fill="currentColor"/></svg>
-      Telegram
-    </a>
-    <a href="https://www.linkedin.com/in/your_handle/" class="btn" target="_blank" rel="noopener" aria-label="LinkedIn" data-analytics="ContactLinkedIn">
-      <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8.5h4V23h-4V8.5zm7 0h3.8v2h.1c.5-1 1.8-2.1 3.7-2.1 4 0 4.7 2.7 4.7 6.2V23h-4v-6.5c0-1.6 0-3.6-2.2-3.6-2.2 0-2.6 1.7-2.6 3.5V23h-4V8.5z" fill="currentColor"/></svg>
-      LinkedIn
-    </a>
-  </div>
-</section>
+<!-- Постоянная контактная панель (всегда видна) -->
+<div class="contact-bar" role="contentinfo" id="contact">
+  <a href="mailto:alienhead891@gmail.com" class="btn primary" aria-label="Email" data-analytics="ContactEmail">✉️ Email</a>
+  <a href="https://t.me/potemkin_tg" class="btn" target="_blank" rel="noopener" aria-label="Telegram" data-analytics="ContactTelegram">Telegram</a>
+  <!-- a href="https://www.linkedin.com/in/your_handle/" class="btn" target="_blank" rel="noopener" aria-label="LinkedIn" data-analytics="ContactLinkedIn">LinkedIn</a-->
+</div>
 
 <footer class="site-footer" role="contentinfo">
-  <small>© <span id="year"></span> Aleksey. <a href="carousel/index.html">Версия Carousel →</a></small>
+  <small>© <span id="year"></span> Kropachev Aleksey. <a href="carousel/index.html">Версия Carousel →</a></small>
 </footer>
 
 <script defer src="app.js"></script>

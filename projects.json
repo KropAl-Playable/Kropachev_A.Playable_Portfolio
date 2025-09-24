@@ -16,7 +16,7 @@
       "date": "2024-12-28",
       "popularity": 87,
       "linkDemo": "projects/desert_city/desert_restorer.html",
-      "linkStore": "https://store.example.com/app/match3",
+      "linkStore": "https://play.google.com/store/apps/details?id=burning.city.mad.survivors.idle.simulator.tycoon&hl=ru&pli=1",
       "playable": { "type": "iframe", "src": "projects/desert_city/desert_restorer.html" }
     },
     {
@@ -35,7 +35,7 @@
       "date": "2024-12-04",
       "popularity": 92,
       "linkDemo": "projects/desert_city/truck_upgrade.html",
-      "linkStore": "https://store.example.com/app/rpg",
+      "linkStore": "https://play.google.com/store/apps/details?id=burning.city.mad.survivors.idle.simulator.tycoon&hl=ru&pli=1",
       "playable": { "type": "iframe", "src": "projects/desert_city/truck_upgrade.html" }
     },
     {
@@ -54,7 +54,7 @@
       "date": "2024-05-29",
       "popularity": 92,
       "linkDemo": "projects/desert_city/water_conveyor.html",
-      "linkStore": "https://store.example.com/app/rpg",
+      "linkStore": "https://play.google.com/store/apps/details?id=burning.city.mad.survivors.idle.simulator.tycoon&hl=ru&pli=1",
       "playable": { "type": "iframe", "src": "projects/desert_city/water_conveyor.html" }
     },
     {
@@ -73,7 +73,7 @@
       "date": "2024-04-11",
       "popularity": 92,
       "linkDemo": "projects/desert_city/upgrade_collect.html",
-      "linkStore": "https://store.example.com/app/rpg",
+      "linkStore": "https://play.google.com/store/apps/details?id=burning.city.mad.survivors.idle.simulator.tycoon&hl=ru&pli=1",
       "playable": { "type": "iframe", "src": "projects/desert_city/upgrade_collect.html" }
     },
     {
@@ -92,7 +92,7 @@
       "date": "2024-05-24",
       "popularity": 92,
       "linkDemo": "projects/desert_city/collect_fight.html",
-      "linkStore": "https://store.example.com/app/rpg",
+      "linkStore": "https://play.google.com/store/apps/details?id=burning.city.mad.survivors.idle.simulator.tycoon&hl=ru&pli=1",
       "playable": { "type": "iframe", "src": "projects/desert_city/collect_fight.html" }
     },
     {
@@ -111,7 +111,7 @@
       "date": "2025-09-03",
       "popularity": 74,
       "linkDemo": "projects/one_state/warhouse.html",
-      "linkStore": "https://store.example.com/app/hyper",
+      "linkStore": "https://play.google.com/store/apps/details?id=com.Chillgaming.oneState&hl=ru",
       "playable": { "type": "iframe", "src": "projects/one_state/warhouse.html" }
     },
     {
@@ -130,7 +130,7 @@
       "date": "2025-05-14",
       "popularity": 74,
       "linkDemo": "projects/one_state/car_tuning_long.html",
-      "linkStore": "https://store.example.com/app/hyper",
+      "linkStore": "https://play.google.com/store/apps/details?id=com.Chillgaming.oneState&hl=ru",
       "playable": { "type": "iframe", "src": "projects/one_state/car_tuning_long.html" }
     },
     {
@@ -149,7 +149,7 @@
       "date": "2025-07-14",
       "popularity": 74,
       "linkDemo": "projects/one_state/improvement_car.html",
-      "linkStore": "https://store.example.com/app/hyper",
+      "linkStore": "https://play.google.com/store/apps/details?id=com.Chillgaming.oneState&hl=ru",
       "playable": { "type": "iframe", "src": "projects/one_state/improvement_car.html" }
     },
     {
@@ -168,7 +168,7 @@
       "date": "2025-02-19",
       "popularity": 74,
       "linkDemo": "projects/test_projects/ride_master.html",
-      "linkStore": "https://store.example.com/app/hyper",
+      "linkStore": "",
       "playable": { "type": "iframe", "src": "projects/test_projects/ride_master.html" }
     },
     {
@@ -187,7 +187,7 @@
       "date": "2025-04-29",
       "popularity": 74,
       "linkDemo": "projects/idle_lumber/index.html",
-      "linkStore": "https://store.example.com/app/hyper",
+      "linkStore": "https://play.google.com/store/apps/details?id=com.lumber.inc&hl=ru",
       "playable": { "type": "iframe", "src": "projects/idle_lumber/index.html" }
     },
     {
@@ -206,7 +206,7 @@
       "date": "2025-01-28",
       "popularity": 74,
       "linkDemo": "projects/army_forces/tutorial_3D.html",
-      "linkStore": "https://store.example.com/app/hyper",
+      "linkStore": "https://play.google.com/store/apps/details?id=hotsiberians.idle.military.operation.army.mission.tycoon&hl=ru",
       "playable": { "type": "iframe", "src": "projects/army_forces/tutorial_3D.html" }
     },
     {
@@ -225,7 +225,7 @@
       "date": "2024-03-23",
       "popularity": 74,
       "linkDemo": "projects/army_forces/training_tailor.html",
-      "linkStore": "https://store.example.com/app/hyper",
+      "linkStore": "https://play.google.com/store/apps/details?id=hotsiberians.idle.military.operation.army.mission.tycoon&hl=ru",
       "playable": { "type": "iframe", "src": "projects/army_forces/training_tailor.html" }
     },
     {
@@ -244,7 +244,7 @@
       "date": "2023-12-08",
       "popularity": 74,
       "linkDemo": "projects/army_forces/upgrade_soldier.html",
-      "linkStore": "https://store.example.com/app/hyper",
+      "linkStore": "https://play.google.com/store/apps/details?id=hotsiberians.idle.military.operation.army.mission.tycoon&hl=ru",
       "playable": { "type": "iframe", "src": "projects/army_forces/upgrade_soldier.html" }
     }
   ]

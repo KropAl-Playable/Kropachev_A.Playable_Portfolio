@@ -20,25 +20,32 @@
 </header>
 
 <main id="main" tabindex="-1">
+  <!-- Каталогизатор как в Grid -->
   <section class="controls" aria-label="Фильтры">
-    <div class="filters">
-      <label for="genre" data-i18n="genre">Жанр</label>
-      <select id="genre" class="select">
-        <option value="all" data-i18n="allGenres">Все жанры</option>
-      </select>
-
-      <label for="forProject" data-i18n="forProject">Проект</label>
-      <select id="forProject" class="select">
-        <option value="all" data-i18n="allProjects">Все проекты</option>
-      </select>
-
-      <label for="order" data-i18n="order">Порядок</label>
-      <select id="order" class="select">
-        <option value="newest" data-i18n="newer">Новее</option>
-        <option value="oldest" data-i18n="older">Старее</option>
-      </select>
-
-      <input id="search" class="input" type="search" placeholder="Поиск…" data-i18n-placeholder="searchPlaceholder" />
+    <div class="filters-rows">
+      <div class="row">
+        <label for="genre" data-i18n="genre">Жанр</label>
+        <select id="genre" class="select">
+          <option value="all" data-i18n="allGenres">Все жанры</option>
+        </select>
+      </div>
+      <div class="row">
+        <label for="forProject" data-i18n="forProject">Проект</label>
+        <select id="forProject" class="select">
+          <option value="all" data-i18n="allProjects">Все проекты</option>
+        </select>
+      </div>
+      <div class="row">
+        <label for="order" data-i18n="order">Порядок</label>
+        <select id="order" class="select">
+          <option value="newest" data-i18n="newer">Новее</option>
+          <option value="oldest" data-i18n="older">Старее</option>
+        </select>
+      </div>
+      <div class="row grow">
+        <label class="visually-hidden" for="search">Поиск</label>
+        <input id="search" class="input" type="search" placeholder="Поиск…" data-i18n-placeholder="searchPlaceholder" />
+      </div>
       <button id="reset" class="btn ghost" data-i18n="reset">Сброс</button>
     </div>
   </section>
@@ -53,7 +60,7 @@
   <div class="dots" id="dots" role="tablist" aria-label="Индикаторы"></div>
 </main>
 
-<!-- Shared Lightbox with phone frame -->
+<!-- Lightbox -->
 <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-title" aria-hidden="true">
   <div class="lightbox__backdrop" data-close></div>
   <article class="lightbox__dialog" role="document">
@@ -67,9 +74,7 @@
     <div class="lightbox__body">
       <div class="phone-frame portrait" id="phoneFrame">
         <div class="notch" aria-hidden="true"></div>
-        <iframe id="playableFrame" title="Playable demo" loading="lazy"
-                sandbox="allow-scripts allow-same-origin"
-                allow="fullscreen; gamepad; accelerometer; gyroscope"></iframe>
+        <iframe id="playableFrame" title="Playable demo" loading="lazy" sandbox="allow-scripts allow-same-origin" allow="fullscreen; gamepad; accelerometer; gyroscope"></iframe>
       </div>
       <p id="projectDesc" class="desc"></p>
       <ul id="projectTech" class="tech-list"></ul>
@@ -78,6 +83,13 @@
       <a id="storeLink" class="btn" target="_blank" rel="noopener" href="#" data-analytics="Store" data-i18n="store">Страница в магазине</a>
     </footer>
   </article>
+</div>
+
+<!-- Постоянная контактная панель -->
+<div class="contact-bar" role="contentinfo">
+  <a href="mailto:aleksey@example.com" class="btn primary" aria-label="Email" data-analytics="ContactEmail">✉️ Email</a>
+  <a href="https://t.me/your_handle" class="btn" target="_blank" rel="noopener" aria-label="Telegram" data-analytics="ContactTelegram">Telegram</a>
+  <a href="https://www.linkedin.com/in/your_handle/" class="btn" target="_blank" rel="noopener" aria-label="LinkedIn" data-analytics="ContactLinkedIn">LinkedIn</a>
 </div>
 
 <footer class="site-footer" role="contentinfo">
