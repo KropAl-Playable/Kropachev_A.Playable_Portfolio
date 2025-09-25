@@ -7,9 +7,8 @@
       "forProject": "Desert City",
       "tags": ["Canvas", "WebGL", "3D", "Joystick", "Third-person"],
       "cover": {
-        "avif": "assets/match3.avif",
-        "webp": "assets/match3.webp",
-        "fallback": "assets/match3.jpg"
+        "wepb": "assets/desert-restorer.wepb",
+        "fallback": "assets/desert-restorer.png"
       },
       "description": "Сбор ресурсов, апгрейды, управление джойстиком.",
       "description_en": "Collecting resources, upgrades, joystick control.",
@@ -26,9 +25,8 @@
       "forProject": "Desert City",
       "tags": ["3D", "Upgrade", "WebGL"],
       "cover": {
-        "avif": "assets/rpg.avif",
-        "webp": "assets/rpg.webp",
-        "fallback": "assets/rpg.jpg"
+        "wepb": "assets/truck-upgrade.wepb",
+        "fallback": "assets/truck-upgrade.png"
       },
       "description": "Апгрейд грузовика",
       "description_en": "Upgrading a truck",
@@ -45,9 +43,8 @@
       "forProject": "Desert City",
       "tags": ["2D", "Upgrade", "WebGL", "ECS", "CreateJS"],
       "cover": {
-        "avif": "assets/rpg.avif",
-        "webp": "assets/rpg.webp",
-        "fallback": "assets/rpg.jpg"
+        "wepb": "assets/water-conveyor.wepb",
+        "fallback": "assets/water-conveyor.png"
       },
       "description": "Апгрейдим конвейер, нанимаем рабочих",
       "description_en": "Upgrading the conveyor, hiring workers",
@@ -64,9 +61,8 @@
       "forProject": "Desert City",
       "tags": ["2D", "Upgrade", "WebGL", "ECS", "CreateJS"],
       "cover": {
-        "avif": "assets/rpg.avif",
-        "webp": "assets/rpg.webp",
-        "fallback": "assets/rpg.jpg"
+        "wepb": "assets/upgrade-collect.wepb",
+        "fallback": "assets/upgrade-collect.png"
       },
       "description": "Апгрейд сооружений, сбор наград",
       "description_en": "Upgrading facilities, collecting rewards",
@@ -83,9 +79,8 @@
       "forProject": "Desert City",
       "tags": ["2D", "Upgrade", "WebGL", "ECS", "CreateJS"],
       "cover": {
-        "avif": "assets/rpg.avif",
-        "webp": "assets/rpg.webp",
-        "fallback": "assets/rpg.jpg"
+        "wepb": "assets/collect-fight.wepb",
+        "fallback": "assets/collect-fight.png"
       },
       "description": "Открываем сундук с карточками, сражаемся с врагами",
       "description_en": "Opening a lootbox with cards, fighting enemies",
@@ -102,9 +97,8 @@
       "forProject": "OneState: RolePlay",
       "tags": ["WebGL", "ECS", "3D", "Joystick", "Third-person"],
       "cover": {
-        "avif": "assets/hyper.avif",
-        "webp": "assets/hyper.webp",
-        "fallback": "assets/hyper.jpg"
+        "wepb": "assets/warhouse.wepb",
+        "fallback": "assets/warhouse.png"
       },
       "description": "Сбор ресурсов, апгрейды, найм NPC, управление джойстиком.",
       "description_en": "Collecting resources, upgrades, hiring NPCs, joystick control.",
@@ -121,9 +115,8 @@
       "forProject": "OneState: RolePlay",
       "tags": ["WebGL", "ECS", "3D", "Racing", "Upgrade"],
       "cover": {
-        "avif": "assets/hyper.avif",
-        "webp": "assets/hyper.webp",
-        "fallback": "assets/hyper.jpg"
+        "wepb": "assets/car-tuning.wepb",
+        "fallback": "assets/car-tuning.png"
       },
       "description": "Апгрейд машины, гонки по прямой.",
       "description_en": "Car upgrade, drag racing.",
@@ -140,9 +133,8 @@
       "forProject": "OneState: RolePlay",
       "tags": ["WebGL", "ECS", "3D", "Upgrade"],
       "cover": {
-        "avif": "assets/hyper.avif",
-        "webp": "assets/hyper.webp",
-        "fallback": "assets/hyper.jpg"
+        "wepb": "assets/improve-car.wepb",
+        "fallback": "assets/improve-car.png"
       },
       "description": "Апгрейд машины",
       "description_en": "Car upgrade",
@@ -159,9 +151,8 @@
       "forProject": "OneState: RolePlay",
       "tags": ["WebGL", "ECS", "3D"],
       "cover": {
-        "avif": "assets/hyper.avif",
-        "webp": "assets/hyper.webp",
-        "fallback": "assets/hyper.jpg"
+        "wepb": "assets/ridemaster.wepb",
+        "fallback": "assets/ridemaster.png"
       },
       "description": "Тестовое задание одной из студий, пытаемся доехать до финиша быстрее, чем мост развалится под нами",
       "description_en": "Test task for one of the studios, we try to reach the finish line before the bridge collapses under us",
@@ -178,9 +169,8 @@
       "forProject": "OneState: RolePlay",
       "tags": ["WebGL", "ECS", "3D", "Hypercore", "Upgrade", "Physics", "Joystick"],
       "cover": {
-        "avif": "assets/hyper.avif",
-        "webp": "assets/hyper.webp",
-        "fallback": "assets/hyper.jpg"
+        "wepb": "assets/lumber.wepb",
+        "fallback": "assets/lumber.png"
       },
       "description": "Сбор и продажа ресурсов, апгрейд машины, апгрейд фасилити. По ряду причин проект не был закончен.",
       "description_en": "Collecting and selling resources, car upgrades, facility upgrades. For a number of reasons, the project was not completed.",
@@ -197,9 +187,8 @@
       "forProject": "Army Forces: Idle Tycoon",
       "tags": ["WebGL", "ECS", "3D"],
       "cover": {
-        "avif": "assets/hyper.avif",
-        "webp": "assets/hyper.webp",
-        "fallback": "assets/hyper.jpg"
+        "wepb": "assets/tutorial.wepb",
+        "fallback": "assets/tutorial.png"
       },
       "description": "Имитация туториального уровня для игры в жанре Idle Tycoon",
       "description_en": "Tutorial level simulation for an Idle Tycoon game",
@@ -216,9 +205,8 @@
       "forProject": "Army Forces: Idle Tycoon",
       "tags": ["CreateJS", "ECS", "2D"],
       "cover": {
-        "avif": "assets/hyper.avif",
-        "webp": "assets/hyper.webp",
-        "fallback": "assets/hyper.jpg"
+        "wepb": "assets/training-tailor.wepb",
+        "fallback": "assets/training-tailor.png"
       },
       "description": "Выбираем тренировки для солдат, прокачиваем их",
       "description_en": "Choosing training for soldiers, upgrading them",
@@ -235,17 +223,106 @@
       "forProject": "Army Forces: Idle Tycoon",
       "tags": ["CreateJS", "ECS", "2D"],
       "cover": {
-        "avif": "assets/hyper.avif",
-        "webp": "assets/hyper.webp",
-        "fallback": "assets/hyper.jpg"
+        "wepb": "assets/upgrade-soldier.wepb",
+        "fallback": "assets/upgrade-soldier.png"
       },
       "description": "Прокачиваем навыки солдата",
       "description_en": "Upgrading soldier skills",
       "date": "2023-12-08",
       "popularity": 74,
-      "linkDemo": "projects/army_forces/upgrade_soldier.html",
+      "linkDemo": "projects/army_forces/training-tailor.html",
       "linkStore": "https://play.google.com/store/apps/details?id=hotsiberians.idle.military.operation.army.mission.tycoon&hl=ru",
       "playable": { "type": "iframe", "src": "projects/army_forces/upgrade_soldier.html" }
+    },
+    {
+      "id": "build-hospital",
+      "title": "Build Hospital",
+      "genres": ["3D", "Upgrade", "Hypercore"],
+      "forProject": "Zombie Hospital: Idle Tycoon",
+      "tags": ["WebGL", "ECS", "3D", "Upgrade", "Hypercore"],
+      "cover": {
+        "wepb": "assets/build-hospital.wepb",
+        "fallback": "assets/build-hospital.png"
+      },
+      "description": "Лечим зомби, строим фасилити",
+      "description_en": "Curing zombies, building facilities",
+      "date": "2025-14-02",
+      "popularity": 74,
+      "linkDemo": "projects/zombie_hospital/build_hospital.html",
+      "linkStore": "https://play.google.com/store/apps/details?id=hotsiberians.idle.zombie.hospital.empire.manager.tycoon&hl=ru",
+      "playable": { "type": "iframe", "src": "projects/zombie_hosptial/build_hospital.html" }
+    },
+    {
+      "id": "hospital-upgrade",
+      "title": "Hospital Upgrade",
+      "genres": ["3D", "Upgrade", "Top-Down"],
+      "forProject": "Zombie Hospital: Idle Tycoon",
+      "tags": ["WebGL", "ECS", "3D", "Upgrade", "Top-Down"],
+      "cover": {
+        "wepb": "assets/hospital-upgrade.wepb",
+        "fallback": "assets/hospital-upgrade.png"
+      },
+      "description": "Лечим зомби, апгрейдим фасилити",
+      "description_en": "Curing zombies, upgrading facilities",
+      "date": "2025-22-01",
+      "popularity": 74,
+      "linkDemo": "projects/zombie_hospital/hospital_upgrade.html",
+      "linkStore": "https://play.google.com/store/apps/details?id=hotsiberians.idle.zombie.hospital.empire.manager.tycoon&hl=ru",
+      "playable": { "type": "iframe", "src": "projects/zombie_hosptial/hospital_upgrade.html" }
+    },
+    {
+      "id": "talking-zombie",
+      "title": "Talking Zombie",
+      "genres": ["3D", "Casual", "Tamagochi"],
+      "forProject": "Zombie Hospital: Idle Tycoon",
+      "tags": ["WebGL", "ECS", "3D", "Casual", "Tamagochi"],
+      "cover": {
+        "wepb": "assets/talking_zombie.wepb",
+        "fallback": "assets/talking_zombie.png"
+      },
+      "description": "Издеваемся над зомби",
+      "description_en": "Mocking the zombie",
+      "date": "2024-18-07",
+      "popularity": 74,
+      "linkDemo": "projects/zombie_hospital/talking_zombie.html",
+      "linkStore": "https://play.google.com/store/apps/details?id=hotsiberians.idle.zombie.hospital.empire.manager.tycoon&hl=ru",
+      "playable": { "type": "iframe", "src": "projects/zombie_hosptial/talking_zombie.html" }
+    },
+    {
+      "id": "healing-surgery",
+      "title": "Healing Surgery",
+      "genres": ["2D", "Casual", "Tamagochi"],
+      "forProject": "Zombie Hospital: Idle Tycoon",
+      "tags": ["CreateJS", "ECS", "2D", "Casual", "Tamagochi"],
+      "cover": {
+        "wepb": "assets/healing-surgery.wepb",
+        "fallback": "assets/healing-surgery.png"
+      },
+      "description": "Пытаемся вылечить зомби",
+      "description_en": "Trying to cure the zombie",
+      "date": "2024-29-03",
+      "popularity": 74,
+      "linkDemo": "projects/zombie_hospital/healing_surgery.html",
+      "linkStore": "https://play.google.com/store/apps/details?id=hotsiberians.idle.zombie.hospital.empire.manager.tycoon&hl=ru",
+      "playable": { "type": "iframe", "src": "projects/zombie_hosptial/healing_surgery.html" }
+    },
+    {
+      "id": "catch-monsters",
+      "title": "Catch Monsters",
+      "genres": ["2D", "Casual", "QTE"],
+      "forProject": "Idle Anomaly: Alien Control",
+      "tags": ["CreateJS", "ECS", "2D", "Casual", "QTE"],
+      "cover": {
+        "wepb": "assets/catch-monsters.wepb",
+        "fallback": "assets/catch-monsters.png"
+      },
+      "description": "Ловим монстров за отведённое время",
+      "description_en": "Catching monsters in a limited time",
+      "date": "2023-29-03",
+      "popularity": 74,
+      "linkDemo": "projects/idle_anomaly/catch_monsters.html",
+      "linkStore": "https://play.google.com/store/apps/details?id=hotsiberians.idle.anomalies.research.station.building.tycoon.simulator&hl=ru",
+      "playable": { "type": "iframe", "src": "projects/idle_anomaly/catch_monsters.html" }
     }
   ]
 }

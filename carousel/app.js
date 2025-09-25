@@ -184,8 +184,6 @@ function createSlide(p){
   const media = document.createElement("div"); media.className="slide__media";
   const picture = document.createElement("picture");
   picture.innerHTML = `
-    <source type="image/avif" srcset="${p.cover.avif}">
-    <source type="image/webp" srcset="${p.cover.webp}">
     <img src="${p.cover.fallback}" alt="${p.title} — cover" loading="lazy" decoding="async">
   `;
   media.appendChild(picture);
