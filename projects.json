@@ -91,6 +91,24 @@
       "playable": { "type": "iframe", "src": "projects/desert_city/collect_fight.html" }
     },
     {
+      "id": "rp_faction_improve",
+      "title": "RP Faction Improvement",
+      "genres": ["3D", "Roleplay", "Choose"],
+      "forProject": "OneState: RolePlay",
+      "tags": ["WebGL", "ECS", "3D", "Roleplay", "Choose"],
+      "cover": {
+        "wepb": "assets/warhouse.wepb",
+        "fallback": "assets/warhouse.png"
+      },
+      "description": "Выбираем фракцию, улучшаем персонажа и сопутку",
+      "description_en": "Choosing a faction, improving the character",
+      "date": "2025-09-29",
+      "popularity": 74,
+      "linkDemo": "projects/one_state/rp_faction.html",
+      "linkStore": "https://play.google.com/store/apps/details?id=com.Chillgaming.oneState&hl=ru",
+      "playable": { "type": "iframe", "src": "projects/one_state/rp_faction.html" }
+    },
+    {
       "id": "warhouse",
       "title": "Warhouse",
       "genres": ["3D", "RPG", "Hypercore", "Stacking"],
@@ -107,6 +125,24 @@
       "linkDemo": "projects/one_state/warhouse.html",
       "linkStore": "https://play.google.com/store/apps/details?id=com.Chillgaming.oneState&hl=ru",
       "playable": { "type": "iframe", "src": "projects/one_state/warhouse.html" }
+    },
+    {
+      "id": "warhouse_bats",
+      "title": "Warhouse Baseball Bats",
+      "genres": ["3D", "RPG", "Hypercore", "Stacking"],
+      "forProject": "OneState: RolePlay",
+      "tags": ["WebGL", "ECS", "3D", "Joystick", "Third-person"],
+      "cover": {
+        "wepb": "assets/warhouse.wepb",
+        "fallback": "assets/warhouse.png"
+      },
+      "description": "Итерация плейбла с бейсбольными битами вместо винтовок",
+      "description_en": "Playable iteration with another resource types",
+      "date": "2025-09-30",
+      "popularity": 74,
+      "linkDemo": "projects/one_state/warhouse_baseball.html",
+      "linkStore": "https://play.google.com/store/apps/details?id=com.Chillgaming.oneState&hl=ru",
+      "playable": { "type": "iframe", "src": "projects/one_state/warhouse_baseball.html" }
     },
     {
       "id": "car-tuning",
