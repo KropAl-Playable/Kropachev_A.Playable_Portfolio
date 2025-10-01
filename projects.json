@@ -97,8 +97,8 @@
       "forProject": "OneState: RolePlay",
       "tags": ["WebGL", "ECS", "3D", "Roleplay", "Choose"],
       "cover": {
-        "wepb": "assets/warhouse.wepb",
-        "fallback": "assets/warhouse.png"
+        "wepb": "assets/rp_faction.wepb",
+        "fallback": "assets/rp_faction.png"
       },
       "description": "Выбираем фракцию, улучшаем персонажа и сопутку",
       "description_en": "Choosing a faction, improving the character",
@@ -133,8 +133,8 @@
       "forProject": "OneState: RolePlay",
       "tags": ["WebGL", "ECS", "3D", "Joystick", "Third-person"],
       "cover": {
-        "wepb": "assets/warhouse.wepb",
-        "fallback": "assets/warhouse.png"
+        "wepb": "assets/warhouse_bats.wepb",
+        "fallback": "assets/warhouse_bats.png"
       },
       "description": "Итерация плейбла с бейсбольными битами вместо винтовок",
       "description_en": "Playable iteration with another resource types",
