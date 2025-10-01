@@ -184,7 +184,7 @@
       "id": "ride-master",
       "title": "RideMaster",
       "genres": ["3D", "Physics", "Racing", "Casual"],
-      "forProject": "OneState: RolePlay",
+      "forProject": "Test Project",
       "tags": ["WebGL", "ECS", "3D"],
       "cover": {
         "wepb": "assets/ridemaster.wepb",
@@ -202,7 +202,7 @@
       "id": "lumber_ugprade",
       "title": "Lumber Upgrade",
       "genres": ["3D", "Physics", "Racing", "Casual", "Hypercore"],
-      "forProject": "OneState: RolePlay",
+      "forProject": "Idle Lumber Inc.",
       "tags": ["WebGL", "ECS", "3D", "Hypercore", "Upgrade", "Physics", "Joystick"],
       "cover": {
         "wepb": "assets/lumber.wepb",
@@ -362,3 +362,4 @@
     }
   ]
 }
+
